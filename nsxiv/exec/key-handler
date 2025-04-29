@@ -1,0 +1,11 @@
+#!/bin/sh
+
+while read -r file
+do
+	case "$1" in
+		w) xwallpaper --stretch "$file" ;;
+		d) rm "$file" ;;
+		y) echo "$file" | xclip -selection clipboard ;;
+		*) exit 1
+	esac
+done

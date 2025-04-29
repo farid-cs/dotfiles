@@ -1,0 +1,11 @@
+set watch
+
+cmd mkdir &mkdir -p "$@"
+cmd term &$TERMINAL
+cmd touch &touch "$@"
+
+map A push :mkdir<space>
+map a push :touch<space>
+map D delete
+map T :term
+map . set hidden!

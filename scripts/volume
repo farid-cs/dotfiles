@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cmd=${1:-get}
+
+case $cmd in
+	get)
+		pactl get-sink-volume @DEFAULT_SINK@ | head -n1 | awk '{print $5}'
+	;;
+	set)
+		arg=${2:-+0%}
+		pactl set-sink-mute @DEFAULT_SINK@ false
+		pactl set-sink-volume @DEFAULT_SINK@ $arg
+	;;
+	mute)
+		pactl set-sink-mute @DEFAULT_SINK@ toggle
+	;;
+esac

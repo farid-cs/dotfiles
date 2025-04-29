@@ -1,0 +1,159 @@
+#!/bin/sh
+
+wlr-randr --output eDP-1 --scale 1.5
+riverctl map normal Alt S spawn toggle-scale
+
+riverctl map normal Alt+Shift Return spawn $TERMINAL
+
+riverctl map normal Alt+Shift C close
+
+riverctl map normal Alt+Shift Q exit
+
+# Alt+J and Alt+K to focus the next/previous view in the layout stack
+riverctl map normal Alt J focus-view next
+riverctl map normal Alt K focus-view previous
+
+# Alt+Shift+J and Alt+Shift+K to swap the focused view with the next/previous
+# view in the layout stack
+riverctl map normal Alt+Shift J swap next
+riverctl map normal Alt+Shift K swap previous
+
+# Alt+Period and Alt+Comma to focus the next/previous output
+riverctl map normal Alt Period focus-output next
+riverctl map normal Alt Comma focus-output previous
+
+# Alt+Shift+{Period,Comma} to send the focused view to the next/previous output
+riverctl map normal Alt+Shift Period send-to-output next
+riverctl map normal Alt+Shift Comma send-to-output previous
+
+# Alt+Return to bump the focused view to the top of the layout stack
+riverctl map normal Alt Return zoom
+
+# Alt+H and Alt+L to decrease/increase the main ratio of rivertile(1)
+riverctl map normal Alt H send-layout-cmd rivertile 'main-ratio -0.05'
+riverctl map normal Alt L send-layout-cmd rivertile 'main-ratio +0.05'
+
+# Alt+Shift+H and Alt+Shift+L to increment/decrement the main count of rivertile(1)
+riverctl map normal Alt+Shift H send-layout-cmd rivertile 'main-count +1'
+riverctl map normal Alt+Shift L send-layout-cmd rivertile 'main-count -1'
+
+# Alt+Alt+{H,J,K,L} to move views
+# riverctl map normal Alt+Alt H move left 100
+# riverctl map normal Alt+Alt J move down 100
+# riverctl map normal Alt+Alt K move up 100
+# riverctl map normal Alt+Alt L move right 100
+
+# Alt+Alt+Control+{H,J,K,L} to snap views to screen edges
+# riverctl map normal Alt+Alt+Control H snap left
+# riverctl map normal Alt+Alt+Control J snap down
+# riverctl map normal Alt+Alt+Control K snap up
+# riverctl map normal Alt+Alt+Control L snap right
+
+# Alt+Alt+Shift+{H,J,K,L} to resize views
+# riverctl map normal Alt+Alt+Shift H resize horizontal -100
+# riverctl map normal Alt+Alt+Shift J resize vertical 100
+# riverctl map normal Alt+Alt+Shift K resize vertical -100
+# riverctl map normal Alt+Alt+Shift L resize horizontal 100
+
+# Alt + Left Mouse Button to move views
+riverctl map-pointer normal Alt BTN_LEFT move-view
+
+# Alt + Right Mouse Button to resize views
+riverctl map-pointer normal Alt BTN_RIGHT resize-view
+
+# Alt + Middle Mouse Button to toggle float
+riverctl map-pointer normal Alt BTN_MIDDLE toggle-float
+
+for i in $(seq 1 9)
+do
+	tags=$((1 << ($i - 1)))
+
+	# Alt+[1-9] to focus tag [0-8]
+	riverctl map normal Alt $i set-focused-tags $tags
+
+	# Alt+Shift+[1-9] to tag focused view with tag [0-8]
+	riverctl map normal Alt+Shift $i set-view-tags $tags
+
+	# Alt+Control+[1-9] to toggle focus of tag [0-8]
+	riverctl map normal Alt+Control $i toggle-focused-tags $tags
+
+	# Alt+Shift+Control+[1-9] to toggle tag [0-8] of focused view
+	riverctl map normal Alt+Shift+Control $i toggle-view-tags $tags
+done
+
+# Alt+0 to focus all tags
+# Alt+Shift+0 to tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal Alt 0 set-focused-tags $all_tags
+riverctl map normal Alt+Shift 0 set-view-tags $all_tags
+
+# Alt+Space to toggle float
+riverctl map normal Alt Space toggle-float
+
+# Alt+F to toggle fullscreen
+riverctl map normal Alt F toggle-fullscreen
+
+# Alt+{Up,Right,Down,Left} to change layout orientation
+riverctl map normal Alt Up    send-layout-cmd rivertile 'main-location top'
+riverctl map normal Alt Right send-layout-cmd rivertile 'main-location right'
+riverctl map normal Alt Down  send-layout-cmd rivertile 'main-location bottom'
+riverctl map normal Alt Left  send-layout-cmd rivertile 'main-location left'
+
+# Declare a passthrough mode. This mode has only a single mapping to return to
+# normal mode. This makes it useful for testing a nested wayland compositor
+riverctl declare-mode passthrough
+
+# Alt+F11 to enter passthrough mode
+riverctl map normal Alt F11 enter-mode passthrough
+
+# Alt+F11 to return to normal mode
+riverctl map passthrough Alt F11 enter-mode normal
+
+# A workaround for brightness keys to work
+riverctl keyboard-group-create main
+riverctl keyboard-group-add main keyboard-0-6-Video_Bus
+riverctl keyboard-group-add main keyboard-0-1-Power_Button
+riverctl keyboard-group-add main keyboard-0-0-Ideapad_extra_buttons
+riverctl keyboard-group-add main keyboard-1-1-AT_Translated_Set_2_keyboard
+
+for mode in normal locked
+do
+	riverctl map $mode None  XF86AudioRaiseVolume  spawn 'volume set +5%'
+	riverctl map $mode None  XF86AudioLowerVolume  spawn 'volume set -5%'
+	riverctl map $mode None  XF86AudioMute         spawn 'volume mute'
+	riverctl map $mode Shift XF86AudioRaiseVolume  spawn 'volume set +1%'
+	riverctl map $mode Shift XF86AudioLowerVolume  spawn 'volume set -1%'
+
+	riverctl map $mode None  XF86MonBrightnessUp    spawn 'brightnessctl set 5%+'
+	riverctl map $mode None  XF86MonBrightnessDown  spawn 'brightnessctl set 5%-'
+	riverctl map $mode Shift XF86MonBrightnessUp    spawn 'brightnessctl set 1%+'
+	riverctl map $mode Shift XF86MonBrightnessDown  spawn 'brightnessctl set 1%-'
+done
+
+riverctl background-color 0x002b36
+riverctl border-color-focused 0x93a1a1
+riverctl border-color-unfocused 0x586e75
+
+# Set keyboard config
+riverctl set-repeat 50 300
+riverctl keyboard-layout -options 'ctrl:nocaps,grp:win_space_toggle' 'us,ru,az'
+
+# Make all views with an app-id that starts with "float" and title "foo" start floating.
+riverctl rule-add -app-id 'float*' -title 'foo' float
+
+# Make all views with app-id "bar" and any title use client-side decorations
+riverctl rule-add -app-id 'bar' csd
+
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivertile
+rivertile -view-padding 6 -outer-padding 6 &
+
+waybar &
+riverctl map normal Alt B spawn 'pkill -x waybar || waybar'
+
+riverctl map normal Alt P spawn 'rofi -show drun'
+
+riverctl map normal Super L spawn 'waylock'
+
+riverctl map normal Super+Shift S spawn 'grim'

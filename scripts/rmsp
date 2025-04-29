@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for path
+do
+	mv "${path}" "$(echo "${path}" | tr ' ()[]' '_')"
+done

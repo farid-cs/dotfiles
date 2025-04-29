@@ -1,0 +1,9 @@
+alias a=acpi
+alias c=clear
+alias fzf='fzf --layout=reverse'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto --group-directories-first -b'
+alias mc='make clean'
+alias mt='make test'
+alias open="$OPENER"
+alias s=sensors

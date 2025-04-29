@@ -1,0 +1,50 @@
+# parameters
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
+# aliases
+. "${ZDOTDIR}/aliasrc"
+
+# options
+setopt autocd
+setopt share_history
+setopt prompt_subst
+
+# completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+
+# bindings
+bindkey -M vicmd 'k' history-search-backward
+bindkey -M vicmd 'j' history-search-forward
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^[[A' history-search-backward
+bindkey -M viins '^[[B' history-search-forward
+bindkey -M vicmd '^[[A' history-search-backward
+bindkey -M vicmd '^[[B' history-search-forward
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# git integration
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' formats '(%b)'
+precmd_functions+=(vcs_info)
+
+# prompt parts
+PROMPT_USER='%B%F{%(!.red.yellow)}%n@%m%f%b'
+PROMPT_PATH='%B%~%b%'
+PROMPT_DOLLAR='(?.%F{green}$%f.%F{red}$%f)'
+PROMPT_BRANCH='${vcs_info_msg_0_}'
+
+PROMPT="${PROMPT_USER}:${PROMPT_PATH}${PROMPT_DOLLAR} "
+RPROMPT="%F{magenta}${PROMPT_BRANCH}%f"
+
+unset PROMPT_USER
+unset PROMPT_PATH
+unset PROMPT_DOLLAR
+unset PROMPT_BRANCH
