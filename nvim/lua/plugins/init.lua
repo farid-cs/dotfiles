@@ -1,8 +1,12 @@
 return {
-	{ "windwp/nvim-autopairs", config = true },
+	{ "windwp/nvim-autopairs", opts = {} },
 	{
 		"ellisonleao/gruvbox.nvim",
-		config = function()
+		opts = {
+			italic = { strings = false },
+		},
+		config = function(_, opts)
+			require("gruvbox").setup(opts)
 			vim.cmd("colorscheme gruvbox")
 		end,
 	},
@@ -13,6 +17,6 @@ return {
 			"sindrets/diffview.nvim",
 		},
 		cmd = "Neogit",
-		config = true,
+		opts = {},
 	},
 }
