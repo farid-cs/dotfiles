@@ -8,8 +8,8 @@ SAVEHIST=100000
 
 # options
 setopt autocd
-setopt share_history
 setopt prompt_subst
+setopt share_history
 
 # completion
 autoload -Uz compinit && compinit
