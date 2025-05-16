@@ -11,4 +11,4 @@ uninstall:
 	rm -rf ${HOME}/.zprofile
 	for f in scripts/*; do rm -f ${PREFIX}/bin/$$f; done
 
-.PHONY: install uninstall
+.PHONY: all install uninstall
