@@ -5,10 +5,6 @@ return {
 		opts = {
 			italic = { strings = false },
 		},
-		config = function(_, opts)
-			require("gruvbox").setup(opts)
-			vim.cmd("colorscheme gruvbox")
-		end,
 	},
 	{
 		"NeogitOrg/neogit",
