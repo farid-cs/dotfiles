@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# restore keyboard
+
+DELAY=250
+RATE=35
+KEYMAP_OPTION='ctrl:nocaps,grp:win_space_toggle'
+KEYMAP_LAYOUT='us,ru,az'
+
+setxkbmap -option $KEYMAP_OPTION -layout $KEYMAP_LAYOUT
+xset r rate $DELAY $RATE

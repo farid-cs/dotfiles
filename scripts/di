@@ -1,0 +1,7 @@
+#!/bin/sh
+
+count=0
+
+TIME="$(date +'%Y%m%d-%H%M%S')"
+
+printf "${HOME}/pictures/${TIME}-%03d" $count
