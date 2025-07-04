@@ -1,0 +1,9 @@
+#!/bin/sh
+
+scale="$(wlr-randr | grep Scale)"
+
+case "$scale" in
+	'  Scale: 1.0'*) wlr-randr --output eDP-1 --scale 1.5 ;;
+	'  Scale: 1.5'*) wlr-randr --output eDP-1 --scale 1.0 ;;
+	*) echo 'unnknown scale'
+esac
