@@ -6,6 +6,11 @@ SAVEHIST=100000
 # aliases
 . "${ZDOTDIR}/aliasrc"
 
+proj() {
+	DIR="$(ls "${HOME}/desktop/projects" | fzf)" || return
+	cd "${HOME}/desktop/projects/${DIR}"
+}
+
 # options
 setopt autocd
 setopt prompt_subst
