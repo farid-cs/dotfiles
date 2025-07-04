@@ -1,35 +1,24 @@
 {
-    "layer": "bottom", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 32, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 5, // Gaps between modules (4px)
-    // Choose the order of the modules
+    "layer": "bottom",
+    "height": 27,
+    "spacing": 5,
     "modules-left": [
 	    "river/tags"
     ],
     "modules-right": [
         "network",
-        "pulseaudio",
-        "backlight",
+	"wireplumber",
         "battery"
     ],
     "modules-center": [
 	    "clock"
     ],
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "  {:%H:%M on %a %d.%m.%Y}"
-    },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{icon}  {percent}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+	"tooltip": false,
+        "format": "{:%H:%M}"
     },
     "battery": {
         "states": {
-            // "good": 90,
-            "warning": 30,
             "critical": 20
         },
         "format": "{icon} {capacity}",
@@ -37,35 +26,22 @@
         "format-charging": " {capacity}",
         "format-plugged": " {capacity}",
         "format-alt": "{icon} {time}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": ["", "", "", "", ""],
-	"interval": 30
+	"interval": 30,
+	"tooltip": false
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip": false,
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-disconnected": ""
     },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
+    "wireplumber": {
         "format": "{icon} {volume}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " ",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
+        "format-icons": ["", "", ""],
+	"tooltip": false
     },
     "river/tags": {
 	    "num-tags": 9
