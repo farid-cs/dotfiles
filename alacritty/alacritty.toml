@@ -1,0 +1,9 @@
+[general]
+import = ["gruvbox.toml"]
+
+[font]
+normal = { family = "Iosevka" }
+size   = 17
+
+[window]
+startup_mode = "Maximized"
