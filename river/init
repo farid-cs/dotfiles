@@ -1,9 +1,16 @@
 #!/bin/sh
 
+grep -x swayidle >/dev/null || swayidle before-sleep 'gtklock' &
+grep -x pipewire >/dev/null || pipewire &
+
 wlr-randr --output eDP-1 --scale 1.5
 riverctl map normal Alt S spawn toggle-scale
 
+riverctl xcursor-theme Adwaita 32
+
 riverctl map normal Alt+Shift Return spawn $TERMINAL
+
+riverctl map normal Alt V spawn "foot --app-id nvim -e nvim"
 
 riverctl map normal Alt+Shift C close
 
@@ -138,12 +145,6 @@ riverctl border-color-unfocused 0x586e75
 riverctl set-repeat 50 300
 riverctl keyboard-layout -options 'ctrl:nocaps,grp:win_space_toggle' 'us,ru,az'
 
-# Make all views with an app-id that starts with "float" and title "foo" start floating.
-riverctl rule-add -app-id 'float*' -title 'foo' float
-
-# Make all views with app-id "bar" and any title use client-side decorations
-riverctl rule-add -app-id 'bar' csd
-
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
@@ -154,6 +155,12 @@ riverctl map normal Alt B spawn 'pkill -x waybar || waybar'
 
 riverctl map normal Alt P spawn 'rofi -show drun'
 
-riverctl map normal Super L spawn 'waylock'
+riverctl map normal Super L spawn 'gtklock'
 
 riverctl map normal Super+Shift S spawn 'grim'
+
+riverctl rule-add -app-id nvim tags $((1 << 0))
+riverctl rule-add -app-id org.qutebrowser.qutebrowser tags $((1 << 2))
+
+foot --app-id vim &
+qutebrowser &
