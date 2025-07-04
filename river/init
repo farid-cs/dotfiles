@@ -8,6 +8,8 @@ riverctl map normal Alt S spawn toggle-scale
 
 riverctl xcursor-theme Adwaita 32
 
+riverctl rule-add -app-id org.pwmt.zathura ssd
+
 riverctl map normal Alt+Shift Return spawn $TERMINAL
 
 riverctl map normal Alt V spawn "foot --app-id nvim -e nvim"
