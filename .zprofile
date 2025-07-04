@@ -1,4 +1,5 @@
 export EDITOR=nvim
+export FZF_DEFAULT_OPTS='--layout=reverse'
 export GOPATH=${HOME}/.local/share/go
 export MANPATH=$MANPATH:~/.local/share/man
 export OPENER=mimeopen
