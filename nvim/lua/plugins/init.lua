@@ -22,12 +22,12 @@ return {
 
 			treesitter.setup()
 			treesitter.update()
-			treesitter.install({ "c", "go", "make", "python", "toml", "cpp" }):wait(600000)
+			treesitter.install({ "c", "go", "make", "python", "toml", "cpp", "ini" }):wait(600000)
 		end,
 		branch = "main",
 		config = function()
 			vim.api.nvim_create_autocmd('FileType', {
-				pattern = { "c", "go", "make", "python", "toml", "cpp" },
+				pattern = { "c",  "dosini", "go", "make", "python", "toml", "cpp" },
 				callback = function()
 					vim.treesitter.start()
 				end,
