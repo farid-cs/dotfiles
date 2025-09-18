@@ -5,5 +5,6 @@ vim.keymap.set("n", "<leader>n", ":set number!<cr>", { noremap = true, silent = 
 vim.keymap.set("n", "<leader>s", ":set list!<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>w", "<c-w>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>f", ":FzfLua files<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>g", ":Neogit<cr>", { noremap = true })
 vim.keymap.set("t", "<C-Space>", "<c-\\><c-n>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-Space>", "<c-[>", { noremap = true, silent = true })
