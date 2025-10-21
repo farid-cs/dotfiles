@@ -126,16 +126,16 @@ riverctl keyboard-group-add main keyboard-1-1-AT_Translated_Set_2_keyboard
 
 for mode in normal locked
 do
-	riverctl map $mode None  XF86AudioRaiseVolume  spawn 'volume set +5%'
-	riverctl map $mode None  XF86AudioLowerVolume  spawn 'volume set -5%'
-	riverctl map $mode None  XF86AudioMute         spawn 'volume mute'
-	riverctl map $mode Shift XF86AudioRaiseVolume  spawn 'volume set +1%'
-	riverctl map $mode Shift XF86AudioLowerVolume  spawn 'volume set -1%'
+	riverctl map -repeat $mode None  XF86AudioRaiseVolume  spawn 'volume set +5%'
+	riverctl map -repeat $mode None  XF86AudioLowerVolume  spawn 'volume set -5%'
+	riverctl map -repeat $mode None  XF86AudioMute         spawn 'volume mute'
+	riverctl map -repeat $mode Shift XF86AudioRaiseVolume  spawn 'volume set +1%'
+	riverctl map -repeat $mode Shift XF86AudioLowerVolume  spawn 'volume set -1%'
 
-	riverctl map $mode None  XF86MonBrightnessUp    spawn 'brightnessctl set 5%+'
-	riverctl map $mode None  XF86MonBrightnessDown  spawn 'brightnessctl set 5%-'
-	riverctl map $mode Shift XF86MonBrightnessUp    spawn 'brightnessctl set 1%+'
-	riverctl map $mode Shift XF86MonBrightnessDown  spawn 'brightnessctl set 1%-'
+	riverctl map -repeat $mode None  XF86MonBrightnessUp    spawn 'brightnessctl set 5%+'
+	riverctl map -repeat $mode None  XF86MonBrightnessDown  spawn 'brightnessctl set 5%-'
+	riverctl map -repeat $mode Shift XF86MonBrightnessUp    spawn 'brightnessctl set 1%+'
+	riverctl map -repeat $mode Shift XF86MonBrightnessDown  spawn 'brightnessctl set 1%-'
 done
 
 riverctl background-color 0x002b36
