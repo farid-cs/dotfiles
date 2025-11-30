@@ -1,0 +1,3 @@
+- stop using a plugin manager for neovim
+  - fetch plugins using either git or curl
+  - install plugins into appropriate directories
