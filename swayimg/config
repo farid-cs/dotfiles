@@ -1,0 +1,16 @@
+[keys.viewer]
+Shift+plus = zoom +10
+minus = zoom -10
+j = step_down
+k = step_up
+h = step_left
+l = step_right
+
+[keys.gallery]
+j = step_down
+k = step_up
+h = step_left
+l = step_right
+
+[viewer]
+window = #000000
