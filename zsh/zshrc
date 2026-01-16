@@ -7,8 +7,8 @@ SAVEHIST=100000
 . "${ZDOTDIR}/aliasrc"
 
 proj() {
-	DIR="$(ls "${HOME}/desktop/projects" | fzf)" || return
-	cd "${HOME}/desktop/projects/${DIR}"
+	DIR="$(ls "${HOME}/Desktop/projects" | fzf)" || return
+	cd "${HOME}/Desktop/projects/${DIR}"
 }
 
 # options
@@ -44,12 +44,12 @@ precmd_functions+=(vcs_info)
 PROMPT_USER='%B%F{%(!.red.yellow)}%n@%m%f%b'
 PROMPT_PATH='%B%~%b%'
 PROMPT_DOLLAR='(?.%F{green}$%f.%F{red}$%f)'
-PROMPT_BRANCH='${vcs_info_msg_0_}'
+#PROMPT_BRANCH='${vcs_info_msg_0_}'
 
 PROMPT="${PROMPT_USER}:${PROMPT_PATH}${PROMPT_DOLLAR} "
-RPROMPT="%F{magenta}${PROMPT_BRANCH}%f"
+#RPROMPT="%F{magenta}${PROMPT_BRANCH}%f"
 
 unset PROMPT_USER
 unset PROMPT_PATH
 unset PROMPT_DOLLAR
-unset PROMPT_BRANCH
+#unset PROMPT_BRANCH
