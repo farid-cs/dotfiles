@@ -5,12 +5,17 @@ j = step_down
 k = step_up
 h = step_left
 l = step_right
+Ctrl+Shift+d = exec rm -f "%"
 
 [keys.gallery]
 j = step_down
 k = step_up
 h = step_left
 l = step_right
+Ctrl+Shift+d = exec rm -f "%"
 
 [viewer]
-window = #000000
+window = #FFFFFF
+
+[gallery]
+window = #FFFFFF
