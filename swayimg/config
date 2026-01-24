@@ -1,17 +1,21 @@
+[general]
+decoration = yes
+size       = fullscreen
+
 [keys.viewer]
-Shift+plus = zoom +10
-minus = zoom -10
-j = step_down
-k = step_up
-h = step_left
-l = step_right
+Shift+plus   = zoom +10
+minus        = zoom -10
+j            = step_down
+k            = step_up
+h            = step_left
+l            = step_right
 Ctrl+Shift+d = exec rm -f "%"
 
 [keys.gallery]
-j = step_down
-k = step_up
-h = step_left
-l = step_right
+j            = step_down
+k            = step_up
+h            = step_left
+l            = step_right
 Ctrl+Shift+d = exec rm -f "%"
 
 [viewer]
