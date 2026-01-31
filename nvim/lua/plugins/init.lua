@@ -21,7 +21,7 @@ return {
 			local treesitter = require("nvim-treesitter")
 
 			treesitter.setup()
-			treesitter.update()
+			treesitter.update():wait(600000)
 			treesitter.install({ "c", "cpp", "go", "ini", "make", "markdown", "python", "rust", "toml", "zig" }):wait(600000)
 		end,
 		branch = "main",
