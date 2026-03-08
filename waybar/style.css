@@ -1,11 +1,11 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: notosans, "Font Awesome 7 Free";
+    font-family: notosans, "Symbols Nerd Font";
     font-size: 15.5px;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: rgb(43, 48, 59);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -19,22 +19,18 @@ button {
     border-radius: 0;
 }
 
-#tags button {
+#workspaces button {
     padding: 0 7px;
     background-color: transparent;
     color: #aaaaaa;
 }
 
-#tags button:hover {
+#workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
 }
 
-#tags button.focused {
+#workspaces button.active {
     background-color: #64727D;
-}
-
-#tags button.occupied {
-    color: #ffffff;
 }
 
 #battery,

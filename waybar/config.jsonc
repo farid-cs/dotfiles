@@ -3,7 +3,7 @@
     "height": 27,
     "spacing": 5,
     "modules-left": [
-	    "river/tags"
+	    "hyprland/workspaces"
     ],
     "modules-right": [
         "network",
@@ -21,7 +21,7 @@
         "states": {
             "critical": 20
         },
-        "format": "{icon} {capacity}",
+        "format": "<big>{icon}</big>  {capacity}",
         "format-full": "{icon} {capacity}",
         "format-charging": " {capacity}",
         "format-plugged": " {capacity}",
@@ -31,19 +31,21 @@
 	"tooltip": false
     },
     "network": {
-        "format-wifi": "",
+        "format-wifi": "<big>{icon}</big>",
+	"format-icons": "",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip": false,
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": ""
+        "format-disconnected": "<big></big>"
     },
     "wireplumber": {
-        "format": "{icon} {volume}",
-        "format-muted": " ",
+        "format": "<big>{icon}</big>  {volume}",
+        "format-muted": "<big> </big>",
         "format-icons": ["", "", ""],
 	"tooltip": false
     },
-    "river/tags": {
-	    "num-tags": 9
+    "hyprland/workspaces": {
+	    "format": "{name}"
     }
+
 }
