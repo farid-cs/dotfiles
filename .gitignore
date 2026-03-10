@@ -1,2 +1,6 @@
 .zcompdump
 /nvim/lazy-lock.json
+dconf/
+keepassxc/
+libreoffice/
+mozilla/
